@@ -3,7 +3,7 @@ import { Shift } from "../models/Shift.model";
 
 export const startShift = async (empId: string) => {
   const employee = await Employee.findById(empId);
-  if (!employee) return {t: 'Employee not found'};
+  if (!employee) throw new Error('Employee not found');
 
   const now = new Date();
 
@@ -12,7 +12,7 @@ export const startShift = async (empId: string) => {
     endTime: { $gt: now }
   });
 
-  if (ongoingShift) return {error: 'Employee already has an ongoing shift'};
+  if (ongoingShift) throw new Error('You already have an ongoing shift');
 
   const existingShiftSameDay = await Shift.findOne({
     employee: employee._id,
@@ -22,7 +22,7 @@ export const startShift = async (empId: string) => {
     }
   });
 
-  if (existingShiftSameDay)  return {error: 'Employee already has a shift on the same day'};
+  if (existingShiftSameDay) throw new Error('You already started a shift today');
 
   const shift = new Shift({
     startTime: now,
@@ -31,4 +31,5 @@ export const startShift = async (empId: string) => {
   });
 
   await shift.save();
+  return shift;
 };
