@@ -3,7 +3,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import connectDB from './config/database';
-import { connect } from 'http2';
+import listEndpoints from "express-list-endpoints";
+import employeeRoute from './routes/employee.routes';
+import shiftRoutes from './routes/shifts.routes';
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(cors());
 
 const port = process.env.PORT || 4003
 
+app.use('/api', employeeRoute)
+app.use('/api', shiftRoutes)
 const connectServer = async () => {
   try {
     await connectDB();
@@ -28,3 +32,5 @@ const connectServer = async () => {
 }
 
 connectServer();
+if(process.env.DEV = 'development') console.info("routes endpoints list: ", listEndpoints(app));
+

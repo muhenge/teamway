@@ -1,5 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-import { IShift } from "./Shift";
+import { IShift } from "./Shift.model";
 
 export interface IEmployee extends Document {
   name: string;
@@ -8,7 +8,7 @@ export interface IEmployee extends Document {
 
 export const EmployeeSchema = new Schema<IEmployee>({
   name: { type: String, required: true },
-  shifts: [{ type: Schema.Types.ObjectId, ref: 'Shift' }]
+  shifts: [{ type: Schema.Types.ObjectId, ref: 'Shift' }],
 }, {timestamps: true})
 
 export const Employee = model<IEmployee>('Employee', EmployeeSchema)
