@@ -14,6 +14,6 @@ export const register = async (req: Request, res: Response) => {
 
   await employee.save();
 
-  return res.json({ message: 'New employee created', data: employee });
+  return await res.status(201).json({ message: 'New employee created', data: employee });
 
 }

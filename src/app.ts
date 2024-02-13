@@ -34,3 +34,4 @@ const connectServer = async () => {
 connectServer();
 if(process.env.DEV = 'development') console.info("routes endpoints list: ", listEndpoints(app));
 
+export default app;
