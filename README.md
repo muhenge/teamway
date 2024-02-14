@@ -6,6 +6,7 @@ To run the application locally, follow these steps:
 2. Navigate to the project directory.
 3. Install dependencies by running `npm install`.
 4. Start the development server by running `npm run dev`.
+5. Start the test `npm run test`
 
 The application will be running at `http://localhost:3500`.
 
