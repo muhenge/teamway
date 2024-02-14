@@ -8,7 +8,6 @@ export interface IShift extends Document{
 
 export const ShiftSchema = new Schema<IShift>({
   employee: { type: Schema.Types.ObjectId, ref: 'Employee', required: true },
-  //: { type: String, required: true },
   startTime: { type: String, required: true },
   endTime: { type: String, required: true },
 })
